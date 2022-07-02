@@ -9,45 +9,68 @@ let petSalon ={
         open:"9:00am",
         close:"6:00pm"
     },
-    pets:[
-        { //anonymous object
-            name:"Scooby",
-            age:50,
-            breed: "Dane",
-            gender:"Male",
-            service:"Grooming",
-            ownerName:"Shaggy",
-            contactPhone:"666-666-666"
-        },
-        {
-            name:"Scrappy",
-            age:40,
-            breed: "Mixed",
-            gender:"Male",
-            service:"Vaccine",
-            ownerName:"Shaggy",
-            contactPhone:"666-666-666"
-        },
-        {
-            name:"Speedy",
-            age:80,
-            breed: "Mixed",
-            gender:"Male",
-            service:"Nails cut",
-            ownerName:"Bugs Bunny",
-            contactPhone:"888-888-888"
-        }
-    ]
+    pets:[]
 }
-
-
-for(let i=0;i<petSalon.pets.length;i++){
-    console.log(petSalon.pets[i].name);
+//constructor function
+//----------- Parameters/ local variables ----------------------->
+function Pet(name,age,gender,breed,service,ownerName,contactPhone){
+    //attributes = parameters
+    this.name=name;
+    this.age=age;
+    this.gender=gender;
+    this.breed=breed;
+    this.service=service;
+    this.owner=ownerName;
+    this.phone=contactPhone;
 }
-
-//creating the function
+//creating the functions
 function displayInfo(){
     document.getElementById("info").innerHTML=`Welcome to the ${petSalon.name} family. It is available at ${petSalon.address} from ${petSalon.hours.open} to ${petSalon.hours.close}`;
 }
-//calling the function
-displayInfo();
+
+function displayNumberOfPets(){
+    document.getElementById("number-pets").innerHTML=`There are ${petSalon.pets.length} pets`;
+}
+
+function register(){
+    //get info from the inputs
+    let petName=document.getElementById("txtPetName").value;
+    let petAge = document.getElementById("numPetAge").value;
+    let petGender = document.getElementById("txtPetGender").value;
+    let petBreed = document.getElementById("txtPetBreed").value;    
+    let petService = document.getElementById("selService").value;  
+    let petOwner = document.getElementById("txtOwnerName").value;
+    let petPhone = document.getElementById("txtPhone").value;
+    
+    //create the obj
+    let newPet = new Pet(petName,petAge,petGender,petBreed,petService,petOwner,petPhone);
+    console.log(newPet);
+    //push the obj
+    petSalon.pets.push(newPet);
+    console.log(petSalon.pets);
+    displayNumberOfPets();
+    clearInputs();
+}
+
+function clearInputs(){
+    document.getElementById("txtPetName").value="";
+    document.getElementById("numPetAge").value="";
+    document.getElementById("txtPetGender").value="";
+}
+
+function init(){
+    //creating objects
+    let scooby = new Pet("Scooby",50,"Male","Dane","Grooming","Shaggy","666-666-666");
+    let scrappy = new Pet("Scrappy",40,"Male","Mixed","Vaccines","Shaggy","666-666-666");
+    let speedy = new Pet("Speedy",80,"Male","Mixed","Nails cut","Bugs Bunny","666-666-666");
+   
+    petSalon.pets.push(scooby,scrappy,speedy);
+    console.log(petSalon.pets);
+    //calling the function
+    displayInfo();
+    displayNumberOfPets();
+
+    //hook events
+}
+
+window.onload=init;

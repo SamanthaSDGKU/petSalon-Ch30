@@ -22,7 +22,28 @@
     </header>
 
     <main class="container">
-        <h2>Register a new pet!</h2>
+        <div class="title">
+             <h2>Register a new pet!</h2>
+             <p id="number-pets"></p>
+        </div>
+        <div>
+            <!--name,age,gender,breed,service,owner,phone-->
+            <input type="text" class="form-control" placeholder="Enter pet's name" id="txtPetName">
+            <input type="number" class="form-control" placeholder="Enter pet's age" id="numPetAge">
+            <input type="text" class="form-control" placeholder="Enter pet's gender" id="txtPetGender">
+            <input type="text" class="form-control" placeholder="Enter pet's breed" id="txtPetBreed">
+            <select class="form-select" id="selService">
+                <option value="Nails cut">Nails cut</option>
+                <option value="Gromming">Grooming</option>
+                <option value="Vaccines">Vaccines</option>
+            </select>
+            <input class="form-control" type="text" placeholder="Enter pet's owner" id="txtOwnerName">
+            <input class="form-control" type="text" placeholder="Enter pet's phone" id="txtPhone">
+            <div class="btn-container">
+                <button class="btn btn-primary" id="btnSave" onclick="register();">Register</button>
+            </div>
+            
+        </div>
     </main>
 
     <footer>
