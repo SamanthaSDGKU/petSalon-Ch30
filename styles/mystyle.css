@@ -1,5 +1,5 @@
 .display-1{
-    color:rgb(248, 86, 86);
+    color:rgb(27, 13, 13);
 }
 
 input,select{
@@ -17,4 +17,18 @@ input,select{
     display: flex;
     justify-content: flex-end;
     margin:2rem;
+}
+
+.pets{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.pet{
+    border:1px solid #606060;
+    background-color: #dedede;
+    padding:1rem;
+    border-radius: 5px;
 }

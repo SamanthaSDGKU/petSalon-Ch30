@@ -32,6 +32,15 @@ function displayNumberOfPets(){
     document.getElementById("number-pets").innerHTML=`There are ${petSalon.pets.length} pets`;
 }
 
+
+function isValid(aPet){
+    let valid=true;
+    if(aPet.name=="" || aPet.service==""){ // is empty?
+        valid=false;
+    }
+    return valid;
+}
+
 function register(){
     //get info from the inputs
     let petName=document.getElementById("txtPetName").value;
@@ -41,15 +50,18 @@ function register(){
     let petService = document.getElementById("selService").value;  
     let petOwner = document.getElementById("txtOwnerName").value;
     let petPhone = document.getElementById("txtPhone").value;
-    
     //create the obj
     let newPet = new Pet(petName,petAge,petGender,petBreed,petService,petOwner,petPhone);
-    console.log(newPet);
-    //push the obj
-    petSalon.pets.push(newPet);
-    console.log(petSalon.pets);
-    displayNumberOfPets();
-    clearInputs();
+    if(isValid(newPet)){
+        //push the obj
+        petSalon.pets.push(newPet);
+        //displayCardPets();
+        console.log(petSalon.pets);
+        displayNumberOfPets();
+        clearInputs();
+    }else{
+        alert("Please enter the information");
+    }
 }
 
 function clearInputs(){
@@ -69,7 +81,7 @@ function init(){
     //calling the function
     displayInfo();
     displayNumberOfPets();
-
+    //displayCardPets();
     //hook events
 }
 
