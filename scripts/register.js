@@ -11,6 +11,8 @@ let petSalon ={
     },
     pets:[]
 }
+//counter 
+let c=0;
 //constructor function
 //----------- Parameters/ local variables ----------------------->
 function Pet(name,age,gender,breed,service,ownerName,contactPhone){
@@ -22,6 +24,7 @@ function Pet(name,age,gender,breed,service,ownerName,contactPhone){
     this.service=service;
     this.owner=ownerName;
     this.phone=contactPhone;
+    this.id=c++;
 }
 //creating the functions
 function displayInfo(){
@@ -55,7 +58,7 @@ function register(){
     if(isValid(newPet)){
         //push the obj
         petSalon.pets.push(newPet);
-        //displayCardPets();
+        displayCardPets();
         console.log(petSalon.pets);
         displayNumberOfPets();
         clearInputs();
@@ -70,6 +73,33 @@ function clearInputs(){
     document.getElementById("txtPetGender").value="";
 }
 
+function deletePet(petID){
+    document.getElementById(petID).remove();
+    //travel the array
+    let petIndex; 
+    for(let i=0;i<petSalon.pets.length;i++){
+        let pet=petSalon.pets[i];
+        //compare the id of the pet
+        if(pet.id == petID){
+            petIndex=i;//get the pet index 
+        }
+    }
+    petSalon.pets.splice(petIndex,1);//remove from the array
+    displayNumberOfPets(); //update the displayNumberOfPets() 
+}
+function search(){
+    let searchString=document.getElementById("txtSearch").value;
+
+    for(let i=0;i<petSalon.pets.length;i++) {
+        let pet =petSalon.pets[i];
+        if(searchString.toLowerCase()==pet.name.toLowerCase()){
+            document.getElementById(pet.id).classList.add("selected");
+        }else{
+            document.getElementById(pet.id).classList.remove("selected");
+        }
+    }
+}
+
 function init(){
     //creating objects
     let scooby = new Pet("Scooby",50,"Male","Dane","Grooming","Shaggy","666-666-666");
@@ -81,7 +111,7 @@ function init(){
     //calling the function
     displayInfo();
     displayNumberOfPets();
-    //displayCardPets();
+    displayCardPets();
     //hook events
 }
 
